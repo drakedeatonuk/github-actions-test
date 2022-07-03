@@ -11,14 +11,14 @@ jobs:
       - name: Log node version
         run: node -v
       - name: Step with docker 
-        uses: docker://node:12/14/1-alpine3.10 # specifies which docker to use at the step level
+        uses: docker://node:12.14.1-alpine3.10 # specifies which docker to use at the step level
         with: 
           entrypoint: '/usr/local/bin/node' # specifies which executable to run within the container
           args: "-v" # specifies an argument to pass to the executable
       - uses: actions/checkout@v1 
-      
+
       - name: Run a script
-        uses: docker://node:12/14/1-alpine3.10 
+        uses: docker://node:12.14.1-alpine3.10 
         with: 
           entrypoint: './script.sh' 
           args: "some string"
