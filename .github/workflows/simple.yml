@@ -69,7 +69,7 @@ jobs:
       - name: Push a random file
         run: |
           pwd
-          echo "https://TESTT:TEST@github.com/$GITHUB_REPOSITORY.git"
+          echo "TEST"
           ls -a 
           git init
           git remote add origin "https://$GITHUB_ACTOR:${{secrets.GITHUB_TOKEN}}@github.com/$GITHUB_REPOSITORY.git"
