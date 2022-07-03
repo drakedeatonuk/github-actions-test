@@ -1,6 +1,6 @@
 name: "Shell Commands"
 
-on: [push]
+on: [push, pull]
 
 jobs:
   run-shell-command:
@@ -99,6 +99,7 @@ jobs:
           --fail
   decrypt:
     runs-on: ubuntu-latest
+    if: ${{ }}
     steps:
       - uses: actions/checkout@v1
       - name: Decrypt File
@@ -107,3 +108,20 @@ jobs:
           PASSPHRASE: ${{ secrets.PASSPHRASE }}
       - name: Print file contents
         run: cat $HOME/secret.json 
+  one:
+    runs-on: ubuntu-18.04
+    if: github.event_name == 'push'
+    steps:
+      - name: Dump Github Context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+        continue-on-error: true # all other steps will run, even if this one fails
+        timeout-minutes: 30 # the maximum amount of time that this job can take before it should be cancelled
+      - name: Dump Job Context 
+        if: failure() # the next step ONLY will run, even if this one fails
+        env:
+          JOB_CONTEXT: ${{ toJson(job) }}
+        run: echo "$JOB_CONTEXT"
+      - name: Next Job
+        run: echo "this job will run even if the one before it fails due to the previous job's if clause"
