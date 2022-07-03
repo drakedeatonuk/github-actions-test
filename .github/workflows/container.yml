@@ -5,7 +5,8 @@ on: push
 jobs:
   node-docker:
     runs-on: ubuntu-latest
-    services:
+    # container: node:latest # specify one container
+    services: # specify multiple containers
       app:
         image: alialaa17/node-api
         ports:
@@ -14,7 +15,6 @@ jobs:
         image: mongo
         ports:
           - "27017:27017"
-    container: node:latest
     steps:
       - name: Post a user
         run: |
