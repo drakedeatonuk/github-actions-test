@@ -1,15 +1,15 @@
 name: Actions Workflow
 
-on: 
+on:
   push:
     branches:
       - master
-      - 'feature/*'
+      - "feature/*"
     # branches-ignore:
     #   - ""
-  # repository_dispatch: 
+  # repository_dispatch:
   #   types: [build]
-  # schedule: 
+  # schedule:
   #   - cron: "0/5 * * * *"
   # push:
   pull_request:
